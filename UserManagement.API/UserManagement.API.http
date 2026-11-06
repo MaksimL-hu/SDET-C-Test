@@ -1,0 +1,37 @@
+@baseUrl = http://localhost:5080
+
+### Список пользователей (сначала пустой)
+GET {{baseUrl}}/api/users
+Accept: application/json
+
+### Создание — скопируйте userId из ответа в переменную ниже
+POST {{baseUrl}}/api/users
+Content-Type: application/json
+
+{
+  "countryIsoCode": "ru",
+  "locale": "ru-RU"
+}
+
+### Замените GUID значением из POST
+@userId = 2c3c504f-6c6c-46ea-b208-73d5d7e75940
+
+GET {{baseUrl}}/api/users/{{userId}}
+
+### Обновление
+PUT {{baseUrl}}/api/users/{{userId}}
+Content-Type: application/json
+
+{
+  "countryIsoCode": "us",
+  "locale": "en-US"
+}
+
+### Ошибка валидации — 400
+POST {{baseUrl}}/api/users
+Content-Type: application/json
+
+{
+  "countryIsoCode": "123",
+  "locale": "ru_ru"
+}
